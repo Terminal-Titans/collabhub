@@ -7,16 +7,19 @@
     flex-wrap: wrap;
 }
 .card{
-    width: 320px;
-    height: 320px;
+    width: 400px;
+    /* height: 320px; */
     margin: 20px auto;
     border: 1px solid rgb(173, 173, 173);
     border-radius: 5px;
     box-shadow: 10px 10px 5px white;
 }
 .cattech{
+    width: 350px;
     display: flex;
-    flex-direction: row;
+    align-items: left;
+    /* flex-direction: row; */
+    align-content: left;
 }
 .idname{
     color: white;
@@ -45,12 +48,13 @@
 }
 .heart{
     margin-left: 7rem;
-    margin-top: 10px;
+    /* margin-top: 10px; */
 }
 
 .card-content{
     display: flex;
-    text-align: left;
+    /* text-align: left; */
+    justify-content: space-between;
     line-height: 4px;
     padding: 3px 10px;
     border-bottom: 1px solid rgb(173, 173, 173)
@@ -155,3 +159,22 @@
   'GRAD' 0,
   'opsz' 48
 }
+
+/* Hide the scrollbar buttons */
+.cattech::-webkit-scrollbar{
+    width: 0px !important;
+}
+::-webkit-scrollbar-button {
+    display: none;
+  }
+  
+  /* Style the scrollbar track
+  ::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
+  
+  /* Style the scrollbar thumb */
+  /* ::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+  } */ 

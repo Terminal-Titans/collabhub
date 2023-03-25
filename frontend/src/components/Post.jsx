@@ -95,7 +95,7 @@ export default function Home() {
       });
   };
 
-  // function to make comment
+  // function to make commentsa
   const makeComment = (text, id) => {
     fetch("http://localhost:5000/comment", {
       method: "put",
@@ -135,21 +135,33 @@ export default function Home() {
             <div className="card">
               {/* card header */}
               <div className="card-header">
-                <div className="card-pic">
+                <div
+                  style={{ display: "flex", flexDirection: "row" }}
+                  className="card-pic"
+                >
                   <img
                     src={posts.postedBy.Photo ? posts.postedBy.Photo : picLink}
                     alt=""
                   />
+                  <h5>
+                    <Link
+                      className="idname"
+                      to={`/profile/${posts.postedBy._id}`}
+                    >
+                      {posts.postedBy.name}
+                    </Link>
+                  </h5>
                 </div>
-                <h5>
-                  <Link
-                    className="idname"
-                    to={`/profile/${posts.postedBy._id}`}
-                  >
-                    {posts.postedBy.name}
-                  </Link>
-                </h5>
-                <div className="heart">
+                <div
+                  style={{
+                    width: "50%",
+                    display: "flex",
+                    flexDirection: "row-reverse",
+                    alignItems: "center",
+                    paddingRight: "10px",
+                  }}
+                  className="heart"
+                >
                   {posts.likes.includes(
                     JSON.parse(localStorage.getItem("user"))._id
                   ) ? (
@@ -173,69 +185,68 @@ export default function Home() {
                   )}
                 </div>
               </div>
+              {/* <br style={{border:"2px solid white"}} /> */}
               {/* card image
             <div className="card-image">
               <img src={posts.photo} alt="" />
             </div> */}
 
               {/* card content */}
-              <div className="card-content">
-                <p>{posts.likes.length} Likes</p>
-                <p>{posts.title} </p>
-                <button style={{ fontWeight: "bold", marginleft:"10px", cursor: "pointer" }}
-                    
-                    onClick={() => {
-                      toggleComment(posts);
-                    }}
-                  >
-                    Request
-                  </button>
+              <div style={{ padding: "0px", margin: "0px" }} className="title">
+                <h1 style={{ padding: "0px", margin: "0px" }}>{posts.title}</h1>
               </div>
 
               {/* add Comment */}
               <div className="add-comment">
                 <div className="cattech">
                   <p style={{ fontWeight: "bold", cursor: "pointer" }}>
-                  <select
-              id="categories"
-              // value={categories}
-              // onChange={handleCategoryChange}
-            >
-              <option value="category1">Category 1</option>
-              <option value="category2">Category 2</option>
-              <option value="category3">Category 3</option>
-            </select>
-
+                    TechStack: {posts.techStacks};
                   </p>
-                  <p style={{ fontWeight: "bold", marginLeft: "2rem", cursor: "pointer" }}>
-                  <select
-              // id="techstacks"
-              // value={techStacks}
-              // onChange={() => handleTechStacksChange()}
-            >
-              <option value="category1">Techstack1</option>
-              <option value="category2">Techstack2</option>
-              <option value="category3">Techstack3</option>
-            </select>
+                  {/* <p style={{ fontWeight: "bold", cursor: "pointer" }}>
+                    <select
+                      id="categories"
+                      // value={categories}
+                      // onChange={handleCategoryChange}
+                    >
+                      <option value="category1">Category 1</option>
+                      <option value="category2">Category 2</option>
+                      <option value="category3">Category 3</option>
+                    </select>
+                  </p> */}
+                  {/* <p
+                    style={{
+                      fontWeight: "bold",
+                      marginLeft: "2rem",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <select
+                    // id="techstacks"
+                    // value={techStacks}
+                    // onChange={() => handleTechStacksChange()}
+                    >
+                      <option value="category1">Techstack1</option>
+                      <option value="category2">Techstack2</option>
+                      <option value="category3">Techstack3</option>
+                    </select>
+                  </p> */}
+                </div>
 
+                {/* <div className="cattech"> */}
+
+                {/* </div> */}
+
+                <div style={{height:"200px",overflow:"scroll"}} className="cattech">
+                  <p style={{ fontWeight: "bold", cursor: "pointer" }}>
+                    Description: {posts.body};
                   </p>
                 </div>
-                {/* <div className="cattech"> */}
-                  <p style={{ fontWeight: "bold", cursor: "pointer" }}>
-                    start: {posts.startDate.slice(0, 10)};
-                  </p>
-                  <p style={{ fontWeight: "bold", cursor: "pointer" }}>
-                    end: {posts.endDate.slice(0, 10)};
-                  </p>
-                {/* </div> */}
 
                 <div className="cattech">
                   <p style={{ fontWeight: "bold", cursor: "pointer" }}>
-                    collaborators: {posts.contributors};
+                    Collaborators: {posts.collaborators}
                   </p>
-                  
                 </div>
-
 
                 {/* <span className="material-symbols-outlined">mood</span>
                 <input
@@ -255,6 +266,30 @@ export default function Home() {
                   Post
                 </button> */}
               </div>
+              <div style={{display:"flex",flexDirection:"row",justifyContent:"space-evenly"}} className="dates">
+                <p style={{ fontWeight: "bold", cursor: "pointer" }}>
+                  Start: {posts.startDate.slice(0, 10)}
+                </p>
+                <p style={{ fontWeight: "bold", cursor: "pointer" }}>
+                  End: {posts.endDate.slice(0, 10)}
+                </p>
+              </div>
+              <div className="card-content">
+                <p>{posts.likes.length} Likes</p>
+
+                <button
+                  style={{
+                    fontWeight: "bold",
+                    marginleft: "10px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    toggleComment(posts);
+                  }}
+                >
+                  Request
+                </button>
+              </div>
             </div>
           );
         })}
@@ -270,22 +305,50 @@ export default function Home() {
                 // console.log("jsdfjlfjlsjflfks")
                 console.log(posts.body);
                 return (
-
-
                   <div className="add-comment">
-                    <p style={{ fontWeight: "bold", color: "black", cursor: "pointer" }}>
+                    <p
+                      style={{
+                        fontWeight: "bold",
+                        color: "black",
+                        cursor: "pointer",
+                      }}
+                    >
                       Categories: {posts.categories};
                     </p>
-                    <p style={{ fontWeight: "bold", color: "black", cursor: "pointer" }}>
+                    <p
+                      style={{
+                        fontWeight: "bold",
+                        color: "black",
+                        cursor: "pointer",
+                      }}
+                    >
                       techStacks: {posts.techStacks};
                     </p>
-                    <p style={{ fontWeight: "bold", color: "black", cursor: "pointer" }}>
+                    <p
+                      style={{
+                        fontWeight: "bold",
+                        color: "black",
+                        cursor: "pointer",
+                      }}
+                    >
                       startDate: {posts.startDate};
                     </p>
-                    <p style={{ fontWeight: "bold", color: "black", cursor: "pointer" }}>
+                    <p
+                      style={{
+                        fontWeight: "bold",
+                        color: "black",
+                        cursor: "pointer",
+                      }}
+                    >
                       endDate: {posts.endDate};
                     </p>
-                    <p style={{ fontWeight: "bold", color: "black", cursor: "pointer" }}>
+                    <p
+                      style={{
+                        fontWeight: "bold",
+                        color: "black",
+                        cursor: "pointer",
+                      }}
+                    >
                       collaborators: {posts.contributors};
                     </p>
                     {/* <p
@@ -296,12 +359,9 @@ export default function Home() {
                 >
                   Profile
                 </p> */}
-
                   </div>
-
                 );
               })}
-
 
               <div className="details">
                 {/* card header */}

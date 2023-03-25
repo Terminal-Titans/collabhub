@@ -10,45 +10,64 @@ export default function Navbar({ login }) {
     const token = localStorage.getItem("jwt");
     if (login || token) {
       return [
-        <>
-          <Link to="/">Home</Link>
-          <Link to="/profile">
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-evenly",
+          }}
+        >
+          <Link style={{ width: "135px" }} to="/">
+            Home
+          </Link>
+          <Link style={{ width: "135px" }} to="/profile">
             <li>Profile</li>
           </Link>
 
-          <Link to="/createPost"><li>Create Post</li></Link>
-          <Link to="/post"><li>Posts</li></Link>
-          
-          <Link style={{ marginLeft: "20px" }} to="/followingpost">
+          <Link style={{ width: "135px" }} to="/createPost">
+            <li>Create Post</li>
+          </Link>
+          <Link style={{ width: "135px" }} to="/post">
+            <li>Posts</li>
+          </Link>
+
+          <Link
+            style={{ width: "135px",marginLeft: "20px" }}
+            to="/followingpost"
+          >
             My Posts
           </Link>
-          <Link to={""}>
+          <Link style={{ width: "135px" }} to={""}>
             <button className="primaryBtn" onClick={() => setModalOpen(true)}>
               Log Out
             </button>
           </Link>
-        </>,
+        </div>,
       ];
     } else {
       return [
-        <>
-          <Link to="/signup">
-            <li>SignUp</li>
-          </Link>
-          <Link to="/signin">
-            <li>SignIn</li>
-          </Link>
-        </>,
+        <div style={{display:"flex",flexDirection:"row",marginTop:"15px",marginRight:"50px"}} >
+            <div>
+            <Link to="/signup">
+              <li>SignUp</li>
+            </Link>
+            </div>
+            <div>
+            <Link to="/signin">
+              <li>SignIn</li>
+            </Link>
+            </div>
+        </div>,
       ];
     }
   };
 
   return (
-    <div className="navbar">
-      <h1>CollabHub</h1>
+    <div style={{ justifyContent:"space-between" }} className="navbar">
+      <h1 style={{marginLeft:"100px"}}>CollabHub</h1>
       {/* <img src={logo} alt="" /> */}
       <ul className="nav-menu">{loginStatus()}</ul>
-
     </div>
   );
 }
