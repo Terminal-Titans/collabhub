@@ -166,29 +166,29 @@ router.put("/comment", requireLogin, (req, res) => {
 
 
 //adding reply to a comment
-router.put("/reply/:commentId", requireLogin, (req, res) => {
-  const reply = {
-    user: req.user._id,
-    text: req.body.text,
-  };
+// router.put("/reply/:commentId", requireLogin, (req, res) => {
+//   const reply = {
+//     user: req.user._id,
+//     text: req.body.text,
+//   };
 
-  Comment.findByIdAndUpdate(
-    req.params.commentId,
-    {
-      $push: { replies: reply },
-    },
-    {
-      new: true,
-    }
-  )
-    .populate("replies.user", "_id name")
-    .exec((err, comment) => {
-      if (err || !comment) {
-        return res.status(422).json({ error: err });
-      }
-      res.json(comment);
-    });
-});
+//   Comment.findByIdAndUpdate(
+//     req.params.commentId,
+//     {
+//       $push: { replies: reply },
+//     },
+//     {
+//       new: true,
+//     }
+//   )
+//     .populate("replies.user", "_id name")
+//     .exec((err, comment) => {
+//       if (err || !comment) {
+//         return res.status(422).json({ error: err });
+//       }
+//       res.json(comment);
+//     });
+// });
 
 
 

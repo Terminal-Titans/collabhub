@@ -142,7 +142,10 @@ export default function Home() {
                   />
                 </div>
                 <h5>
-                  <Link className="idname" to={`/profile/${posts.postedBy._id}`}>
+                  <Link
+                    className="idname"
+                    to={`/profile/${posts.postedBy._id}`}
+                  >
                     {posts.postedBy.name}
                   </Link>
                 </h5>
@@ -169,7 +172,6 @@ export default function Home() {
                     </span>
                   )}
                 </div>
-
               </div>
               {/* card image
             <div className="card-image">
@@ -178,11 +180,8 @@ export default function Home() {
 
               {/* card content */}
               <div className="card-content">
-
-
                 <p>{posts.likes.length} Likes</p>
                 <p>{posts.body} </p>
-
               </div>
 
               {/* add Comment */}
@@ -191,7 +190,7 @@ export default function Home() {
                   Categories: {posts.body};
                 </p>
                 <p style={{ fontWeight: "bold", cursor: "pointer" }}>
-                  techStacks: {posts.category};
+                  techStacks: {posts.collaborators};
                 </p>
                 <p style={{ fontWeight: "bold", cursor: "pointer" }}>
                   startDate: {posts.tech};
