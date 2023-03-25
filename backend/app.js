@@ -8,7 +8,7 @@ const cors = require("cors");
 const app = express();
 
 // Specifying the port to listen to
-const port = 8000;
+const port = 5000;
 
 // Loading environment variables from a .env file
 dotenv.config();
@@ -22,6 +22,7 @@ app.use(cors());
 // Importing the user and post models
 require("./models/user");
 require("./models/post");
+require("./models/comment");
 
 // Parsing incoming JSON data
 app.use(express.json());

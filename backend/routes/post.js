@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const requireLogin = require("../middlewares/requireLogin");
 const POST = mongoose.model("POST");
 const USER = mongoose.model("USER");
+const COMMENT = mongoose.model("COMMENT");
 
 // Route to create a new post
 router.post("/createPost", requireLogin, (req, res) => {
@@ -140,8 +141,8 @@ router.put("/unlike", requireLogin, (req, res) => {
 // Route to add a comment to a post
 router.put("/comment", requireLogin, (req, res) => {
   const comment = {
-    comment: req.body.text,
-    postedBy: req.user._id,
+    text: req.body.text,
+    user: req.user._id,
   };
   POST.findByIdAndUpdate(
     req.body.postId,
@@ -162,6 +163,34 @@ router.put("/comment", requireLogin, (req, res) => {
       }
     });
 });
+
+
+//adding reply to a comment
+router.put("/reply/:commentId", requireLogin, (req, res) => {
+  const reply = {
+    user: req.user._id,
+    text: req.body.text,
+  };
+
+  Comment.findByIdAndUpdate(
+    req.params.commentId,
+    {
+      $push: { replies: reply },
+    },
+    {
+      new: true,
+    }
+  )
+    .populate("replies.user", "_id name")
+    .exec((err, comment) => {
+      if (err || !comment) {
+        return res.status(422).json({ error: err });
+      }
+      res.json(comment);
+    });
+});
+
+
 
 // Route to delete a post
 router.delete("/deletePost/:postId", requireLogin, (req, res) => {
