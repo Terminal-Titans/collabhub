@@ -6,22 +6,31 @@ import "./Home.css";
 
 
 export default function Home() {
-  var array = [];
-  var binary=0;
+  var [buttonColors, setButtonColors] = useState({});
+
+  
+  var [array,setArray] = useState([]);
   function add(item) {
     const index = array.indexOf(item);
-    if(index == -1) {
-      array.push(item); //pushing technology into the list
-      // console.log("running");
-      console.log(array);
+    if (index == -1) {
+      setArray([...array, item]);
+      setButtonColors({
+        ...buttonColors,
+        [item]: "yellow",
+      });
+    } else {
+      
+      setButtonColors((buttonColors) => ({
+        ...buttonColors,
+        [item]: "white",
+      }));
+      setArray(array.filter((value) => value !== item));
     }
-    else{
-      array = array.filter((value) => value !== item); //removing technology if it is already clicked
-      console.log(array);
-    }
+    console.log(array);
   }
 
-  function submitHandle(){
+  function submitHandle() {
+    console.log(array)
     console.log("submit handle");
   }
 
@@ -29,15 +38,45 @@ export default function Home() {
     <div className="home">
       <div className="homeWrapper">
         <div className="technologies">
-          <button onClick={() => add("web")} className="technology"><h4>Web development</h4></button>
-          <button onClick={() => add("app")} className="technology"><h4>App development</h4></button>
-          <button onClick={() => add("ml")} className="technology"><h4>Machine Learning</h4></button>
-          <button onClick={() => add("blockchain")} className="technology"><h4>Blockchain</h4></button>
+          <button
+            style={{ backgroundColor: buttonColors["web"] }}
+            onClick={() => add("web")}
+            id="web"
+            className="technology"
+          >
+            <h4>Web development</h4>
+          </button>
+          <button
+            style={{ backgroundColor: buttonColors["app"] }}
+            onClick={() => add("app")}
+            id="app"
+            className="technology"
+          >
+            <h4>App development</h4>
+          </button>
+          <button
+            style={{ backgroundColor: buttonColors["ml"] }}
+            onClick={() => add("ml")}
+            id="ml"
+            className="technology"
+          >
+            <h4>Machine Learning</h4>
+          </button>
+          <button
+            style={{ backgroundColor: buttonColors["blockchain"] }}
+            onClick={() => add("blockchain")}
+            id="blockchain"
+            className="technology"
+          >
+            <h4>Blockchain</h4>
+          </button>
         </div>
-        <button onClick={() => submitHandle()} className="button">SUBMIT</button>
+        <button onClick={() => submitHandle()} className="button">
+          SUBMIT
+        </button>
       </div>
     </div>
-  )
+  );
 }
 
 

@@ -5,11 +5,11 @@ const postSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: true,
+      // required: true,
     },
     body: {
       type: String,
-      required: true,
+      // required: true,
     },
     photo: {
       type: String,
@@ -18,7 +18,7 @@ const postSchema = new mongoose.Schema(
     likes: [{ type: ObjectId, ref: "USER" }],
     comments: [
       {
-        comment: { type: String, required: true },
+        comment: { type: String },
         postedBy: { type: ObjectId, ref: "USER" },
       },
     ],
@@ -30,7 +30,7 @@ const postSchema = new mongoose.Schema(
       {
         name: {
           type: String,
-          required: true,
+          // required: true,
         },
       },
     ],
@@ -38,7 +38,7 @@ const postSchema = new mongoose.Schema(
       {
         name: {
           type: String,
-          required: true,
+          // required: true,
         },
       },
     ],
@@ -50,7 +50,7 @@ const postSchema = new mongoose.Schema(
     },
     collaborators: {
       type: Number,
-      required: true,
+      // required: true,
       default: 0,
     },
   },

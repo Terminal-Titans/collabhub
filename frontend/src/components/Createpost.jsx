@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Createpost.css";
+import MultiSelectFilter from "./MultiSelectFilter";
 
 const NewPost = () => {
   const [title, setTitle] = useState("");
@@ -15,25 +16,18 @@ const NewPost = () => {
   };
 
   const handleCategoryChange = (e) => {
-    const category = e.target.value;
-    console.log("category", categories);
-    setCategories([category]);
-    // if (categories.includes(category)) {
-    //   setCategories(categories.filter((c) => c !== category));
-    // } else {
-    //   setCategories([...categories, category]);
-    // }
+    const category = e.target.value; 
+    console.log(category);
   };
 
   const handleTechStacksChange = (e) => {
     const techStack = e.target.value;
-    if (techStacks.includes(techStack)) {
-      setTechStacks(techStacks.filter((t) => t !== techStack));
-    } else {
-      setTechStacks([...techStacks, techStack]);
-    }
+    console.log(techStack);
   };
 
+  const handletechStacksChange = (e) => {
+    setTechStacks(e.target.value);
+  };
   const handleContributorsChange = (e) => {
     setContributors(e.target.value);
   };
@@ -66,6 +60,7 @@ const NewPost = () => {
     fetch("http://localhost:5000/createPost", {
       method: "POST",
       headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newPost),
@@ -94,7 +89,6 @@ const NewPost = () => {
       <h1>CREATE A NEW POST</h1>
       <form className="create-form" onSubmit={handleSubmit}>
         <div className="div">
-          
           <div>
             <label htmlFor="title">Title:</label>
             <input
@@ -107,31 +101,26 @@ const NewPost = () => {
           </div>
 
           <div>
-            <label htmlFor="category">Category:</label>
-            <select
-              id="categories"
-              // value={categories}
-              onChange={handleCategoryChange}
-            >
-              <option value="category1">Category 1</option>
-              <option value="category2">Category 2</option>
-              <option value="category3">Category 3</option>
-            </select>
-            {/* <div>
-              Selected categories:{" "}
-              {categories.map((category, index) => (
-                <span key={index}>{category} </span>
-              ))}
-            </div> */}
+            <MultiSelectFilter />
           </div>
-
+          <div>
+            <label htmlFor="techStacks">Tech Stack</label>
+            <input
+              type="text"
+              id="techStacks"
+              value={techStacks}
+              onChange={handletechStacksChange}
+              required
+            />
+          </div>
           <div>
             <label htmlFor="contributors">Contributors:</label>
             <input
-              type="text"
+              type="number"
               id="contributors"
               value={contributors}
               onChange={handleContributorsChange}
+              min="0"
               required
             />
           </div>
@@ -157,10 +146,9 @@ const NewPost = () => {
               required
             />
           </div>
-
         </div>
         <div className="div">
-          <div>
+          <div style={{display:"flex",flexDirection:"column"}}>
             <label htmlFor="description">Description:</label>
             <textarea
               rows="20"
@@ -172,24 +160,6 @@ const NewPost = () => {
             />
           </div>
           <button type="submit">Create post</button>
-        </div>
-        <div>
-            <label htmlFor="techStack">techStacks:</label>
-            <select
-              id="techstacks"
-              value={techStacks}
-              onChange={() => handleTechStacksChange()}
-            >
-              <option value="category1">Category1</option>
-              <option value="category2">Category2</option>
-              <option value="category3">Category3</option>
-            </select>
-            <div>
-              Selected categories:{" "}
-              {techStacks.map((techStack, index) => (
-                <span key={index}>{techStack} </span>
-              ))}
-          </div>
         </div>
       </form>
     </div>
