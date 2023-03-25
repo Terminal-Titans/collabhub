@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Post.css";
+import "./myPost.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
@@ -12,7 +12,6 @@ export default function() {
   const [item, setItem] = useState([]);
 
   // Toast functions
-  const notifyA = (msg) => toast.error(msg);
   const notifyB = (msg) => toast.success(msg);
 
   useEffect(() => {
@@ -124,7 +123,7 @@ export default function() {
   };
 
   return (
-    <div className="home">
+    <div className="homemypost">
       {/* card */}
       {data.map((posts) => {
         return (
@@ -145,7 +144,7 @@ export default function() {
             </div>
             {/* card image */}
             <div className="card-image">
-              <img src={posts.photo} alt="" />
+              {/* <img src={posts.photo} alt="" /> */}
             </div>
 
             {/* card content */}

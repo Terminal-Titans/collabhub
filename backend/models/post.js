@@ -1,15 +1,16 @@
 const mongoose = require("mongoose")
+const moment = require("moment");
 const { ObjectId } = mongoose.Schema.Types
 
 const postSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: true,
+      // required: true,
     },
     body: {
       type: String,
-      required: true,
+      // required: true,
     },
     photo: {
       type: String,
@@ -30,7 +31,7 @@ const postSchema = new mongoose.Schema(
       {
         name: {
           type: String,
-          required: true,
+          // required: true,
         },
       },
     ],
@@ -38,19 +39,38 @@ const postSchema = new mongoose.Schema(
       {
         name: {
           type: String,
-          required: true,
+          // required: true,
         },
       },
     ],
+    // startDate: {
+    //   type: Date,
+    // },
+    // endDate: {
+    //   type: Date,
+    // },
     startDate: {
       type: Date,
+      // get: function(date) {
+      //   return moment(date).format("YYYY-MM-DD");
+      // },
+      // set: function(dateString) {
+      //   return moment(dateString, "YYYY-MM-DD").toDate();
+      // },
     },
     endDate: {
       type: Date,
+      // get: function(date) {
+      //   return moment(date).format("YYYY-MM-DD");
+      // },
+      // set: function(dateString) {
+      //   return moment(dateString, "YYYY-MM-DD").toDate();
+      // },
     },
+
     collaborators: {
       type: Number,
-      required: true,
+      // required: true,
       default: 0,
     },
   },
@@ -58,3 +78,4 @@ const postSchema = new mongoose.Schema(
 );
 
 mongoose.model("POST", postSchema)
+

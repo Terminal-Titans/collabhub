@@ -6,27 +6,27 @@ const commentSchema = new mongoose.Schema(
     user: {
       type: ObjectId,
       ref: "USER",
-      required: true,
+      // required: true,
     },
     post: {
       type: ObjectId,
       ref: "POST",
-      required: true,
+      // required: true,
     },
     text: {
       type: String,
-      required: true,
+      // required: true,
     },
     replies: [
       {
         user: {
           type: ObjectId,
           ref: "USER",
-          required: true,
+          // required: true,
         },
         text: {
           type: String,
-          required: true,
+          // required: true,
         },
       },
     ],

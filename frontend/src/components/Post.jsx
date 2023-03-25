@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 export default function Home() {
-  var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png"
+  var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png";
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [comment, setComment] = useState("");
@@ -125,7 +125,7 @@ export default function Home() {
   };
 
   return (
-    <div className="home">
+    <div className="homepost">
       <div className="homecard">
         {/* card */}
         {data.map((posts) => {
@@ -181,34 +181,62 @@ export default function Home() {
               {/* card content */}
               <div className="card-content">
                 <p>{posts.likes.length} Likes</p>
-                <p>{posts.body} </p>
+                <p>{posts.title} </p>
+                <button style={{ fontWeight: "bold", marginleft:"10px", cursor: "pointer" }}
+                    
+                    onClick={() => {
+                      toggleComment(posts);
+                    }}
+                  >
+                    Request
+                  </button>
               </div>
 
               {/* add Comment */}
               <div className="add-comment">
-                <p style={{ fontWeight: "bold", cursor: "pointer" }}>
-                  Categories: {posts.body};
-                </p>
-                <p style={{ fontWeight: "bold", cursor: "pointer" }}>
-                  techStacks: {posts.collaborators};
-                </p>
-                <p style={{ fontWeight: "bold", cursor: "pointer" }}>
-                  startDate: {posts.tech};
-                </p>
-                <p style={{ fontWeight: "bold", cursor: "pointer" }}>
-                  endDate: {posts.start};
-                </p>
-                <p style={{ fontWeight: "bold", cursor: "pointer" }}>
-                  collaborators: {posts.end};
-                </p>
-                <p
-                  style={{ fontWeight: "bold", cursor: "pointer" }}
-                  onClick={() => {
-                    toggleComment(posts);
-                  }}
-                >
-                  Profil
-                </p>
+                <div className="cattech">
+                  <p style={{ fontWeight: "bold", cursor: "pointer" }}>
+                  <select
+              id="categories"
+              // value={categories}
+              // onChange={handleCategoryChange}
+            >
+              <option value="category1">Category 1</option>
+              <option value="category2">Category 2</option>
+              <option value="category3">Category 3</option>
+            </select>
+
+                  </p>
+                  <p style={{ fontWeight: "bold", marginLeft: "2rem", cursor: "pointer" }}>
+                  <select
+              // id="techstacks"
+              // value={techStacks}
+              // onChange={() => handleTechStacksChange()}
+            >
+              <option value="category1">Techstack1</option>
+              <option value="category2">Techstack2</option>
+              <option value="category3">Techstack3</option>
+            </select>
+
+                  </p>
+                </div>
+                {/* <div className="cattech"> */}
+                  <p style={{ fontWeight: "bold", cursor: "pointer" }}>
+                    start: {posts.startDate.slice(0, 10)};
+                  </p>
+                  <p style={{ fontWeight: "bold", cursor: "pointer" }}>
+                    end: {posts.endDate.slice(0, 10)};
+                  </p>
+                {/* </div> */}
+
+                <div className="cattech">
+                  <p style={{ fontWeight: "bold", cursor: "pointer" }}>
+                    collaborators: {posts.contributors};
+                  </p>
+                  
+                </div>
+
+
                 {/* <span className="material-symbols-outlined">mood</span>
                 <input
                   type="text"
@@ -235,21 +263,45 @@ export default function Home() {
         {show && (
           <div className="showComment">
             <div className="container">
-              <div className="postPic">
+              {/* <div className="postPic">
                 <img src={item.photo} alt="" />
-              </div>
-              {/* <div className="pic">
-              {data.map((posts) => {
-                return(
-                <div className="card-pic">
-                <img
-                  src={posts.postedBy.Photo ? posts.postedBy.Photo : picLink}
-                  // src={posts.postedBy.Photo}
-                  alt=""
-                />
-              </div>);
-              })}
               </div> */}
+              {data.map((posts) => {
+                // console.log("jsdfjlfjlsjflfks")
+                console.log(posts.body);
+                return (
+
+
+                  <div className="add-comment">
+                    <p style={{ fontWeight: "bold", color: "black", cursor: "pointer" }}>
+                      Categories: {posts.categories};
+                    </p>
+                    <p style={{ fontWeight: "bold", color: "black", cursor: "pointer" }}>
+                      techStacks: {posts.techStacks};
+                    </p>
+                    <p style={{ fontWeight: "bold", color: "black", cursor: "pointer" }}>
+                      startDate: {posts.startDate};
+                    </p>
+                    <p style={{ fontWeight: "bold", color: "black", cursor: "pointer" }}>
+                      endDate: {posts.endDate};
+                    </p>
+                    <p style={{ fontWeight: "bold", color: "black", cursor: "pointer" }}>
+                      collaborators: {posts.contributors};
+                    </p>
+                    {/* <p
+                  style={{ fontWeight: "bold",color: "black", cursor: "pointer" }}
+                  onClick={() => {
+                    toggleComment(posts);
+                  }}
+                >
+                  Profile
+                </p> */}
+
+                  </div>
+
+                );
+              })}
+
 
               <div className="details">
                 {/* card header */}
@@ -263,24 +315,32 @@ export default function Home() {
                       alt=""
                     />
                   </div>
-                  <h5>{item.postedBy.name}</h5>
+                  <h5 style={{ color: "black" }}>{item.postedBy.name}</h5>
                 </div>
 
                 {/* commentSection */}
                 <div
                   className="comment-section"
-                  style={{ borderBottom: "1px solid #00000029" }}
+                  style={{
+                    color: "black",
+                    borderBottom: "1px solid #00000029",
+                  }}
                 >
                   {item.comments.map((comment) => {
                     return (
                       <p className="comm">
                         <span
                           className="commenter"
-                          style={{ fontWeight: "bolder" }}
+                          style={{ color: "black", fontWeight: "bolder" }}
                         >
                           {comment.postedBy.name}{" "}
                         </span>
-                        <span className="commentText">{comment.comment}</span>
+                        <span
+                          style={{ color: "black" }}
+                          className="commentText"
+                        >
+                          {comment.comment}
+                        </span>
                       </p>
                     );
                   })}
@@ -288,8 +348,8 @@ export default function Home() {
 
                 {/* card content */}
                 <div className="card-content">
-                  <p>{item.likes.length} Likes</p>
-                  <p>{item.body}</p>
+                  <p style={{ color: "black" }}>{item.likes.length} Likes</p>
+                  <p style={{ color: "black" }}>{item.body}</p>
                 </div>
 
                 {/* add Comment */}

@@ -4,23 +4,23 @@ const { ObjectId } = mongoose.Schema.Types
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        // required: true
     },
     college: {
         type: String,
-        required: true
+        // required: true
     },
     userName: {
         type: String,
-        required: true
+        // required: true
     },
     email: {
         type: String,
-        required: true
+        // required: true
     },
     password: {
         type: String,
-        required: true
+        // required: true
     },
     Photo: {
         type: String,
@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
     },
     Github: {
         type: String,
-        required: true
+        // required: true
     },
     GFG: {
         type: String

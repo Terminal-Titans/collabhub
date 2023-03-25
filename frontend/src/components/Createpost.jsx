@@ -39,11 +39,13 @@ const NewPost = () => {
   };
 
   const handleStartDateChange = (e) => {
-    setStartDate(e.target.value);
+    const date = new Date(e.target.value);
+    setStartDate(date.slice(0, 10));
   };
-
+  
   const handleEndDateChange = (e) => {
-    setEndDate(e.target.value);
+    const date = new Date(e.target.value);
+    setEndDate(date.slice(0, 10));
   };
 
   const handleDescriptionChange = (e) => {
@@ -66,6 +68,7 @@ const NewPost = () => {
     fetch("http://localhost:5000/createPost", {
       method: "POST",
       headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newPost),

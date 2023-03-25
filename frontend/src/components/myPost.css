@@ -1,14 +1,15 @@
-.homepost{
+/* .home{
     margin: 20px;
-}
-.homecard{
+} */
+.homemypost{
+    margin-top: 25rem;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 .card{
     width: 320px;
-    height: 320px;
+    height: 350px;
     margin: 20px auto;
     border: 1px solid rgb(173, 173, 173);
     border-radius: 5px;

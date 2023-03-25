@@ -20,9 +20,9 @@ router.post("/createPost", requireLogin, (req, res) => {
     collaborators,
   } = req.body;
   // Check if required fields are not empty
-  if (!title || !body || !categories || !collaborators) {
-    return res.status(422).json({ error: "Please add all the fields" });
-  }
+  // if (!title || !body || !categories || !collaborators) {
+  //   return res.status(422).json({ error: "Please add all the fields" });
+  // }
   console.log(req.user);
   // Create a new post instance
   const post = new POST({
