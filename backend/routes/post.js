@@ -56,7 +56,7 @@ router.post("/createPost", requireLogin, (req, res) => {
 });
 
 // Route to get all posts from the database
-router.get("/allposts", requireLogin, (req, res) => {
+router.get("/allposts", (req, res) => {
   POST.find()
     .populate("postedBy", "_id name Photo")
     .populate("comments.postedBy", "_id name")
@@ -214,4 +214,46 @@ router.delete("/deletePost/:postId", requireLogin, (req, res) => {
     });
 });
 
+// Route to request a project work
+router.put("/request", requireLogin, async (req, res) => {
+  POST.findByIdAndUpdate(
+    req.body.postId,
+    {
+      $push: { request: req.user._id },
+    },
+    {
+      new: true,
+    }
+  )
+    .populate("postedBy", "_id name Photo")
+    .exec((err, result) => {
+      if (err) {
+        return res.status(422).json({ error: err });
+      } else {
+        res.json(result);
+      }
+    });
+});
+
+
+// Route to unrequest a project work
+router.put("/unrequest", requireLogin, (req, res) => {
+  POST.findByIdAndUpdate(
+    req.body.postId,
+    {
+      $pull: { request: req.user._id },
+    },
+    {
+      new: true,
+    }
+  )
+    .populate("postedBy", "_id name Photo")
+    .exec((err, result) => {
+      if (err) {
+        return res.status(422).json({ error: err });
+      } else {
+        res.json(result);
+      }
+    });
+});
 module.exports = router;
