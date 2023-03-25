@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import "./Createpost.css";
 import MultiSelectFilter from "./MultiSelectFilter";
+import { Link, useNavigate } from "react-router-dom";
 
 const NewPost = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [categories, setCategories] = useState([]);
   const [contributors, setContributors] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [description, setDescription] = useState("");
-  const [techStacks, setTechStacks] = useState([]);
+  const [techStacks, setTechStacks] = useState("");
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -33,13 +35,12 @@ const NewPost = () => {
   };
 
   const handleStartDateChange = (e) => {
-    const date = new Date(e.target.value);
-    setStartDate(date.slice(0, 10));
+    setStartDate(e.target.value);
   };
   
   const handleEndDateChange = (e) => {
-    const date = new Date(e.target.value);
-    setEndDate(date.slice(0, 10));
+  
+    setEndDate(e.target.value);
   };
 
   const handleDescriptionChange = (e) => {
@@ -70,6 +71,7 @@ const NewPost = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        navigate("/post")
         // Do something with the response data
       })
       .catch((error) => {

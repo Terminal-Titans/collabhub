@@ -1,6 +1,6 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 const moment = require("moment");
-const { ObjectId } = mongoose.Schema.Types
+const { ObjectId } = mongoose.Schema.Types;
 
 const postSchema = new mongoose.Schema(
   {
@@ -35,14 +35,15 @@ const postSchema = new mongoose.Schema(
         },
       },
     ],
-    techStacks: {type:String},
+    techStacks: {
+      type: String,
+      // required: true,
+    },
     startDate: {
       type: Date,
-      
     },
     endDate: {
       type: Date,
-     
     },
     collaborators: {
       type: Number,
@@ -53,5 +54,4 @@ const postSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-mongoose.model("POST", postSchema)
-
+mongoose.model("POST", postSchema);

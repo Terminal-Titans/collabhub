@@ -2,11 +2,10 @@ import React, { useState } from "react";
 
 export default function MultiSelectFilter() {
   const [sportsData, setSportsData] = useState([
-    { id: "game1", sports: "Badminton" },
-    { id: "game2", sports: "Tennis" },
-    { id: "game3", sports: "Football" },
-    { id: "game4", sports: "Basketball" },
-    { id: "game5", sports: "Hockey" },
+    { id: "dev1", sports: "web" },
+    { id: "dev2", sports: "app" },
+    { id: "dev3", sports: "ml" },
+    { id: "dev4", sports: "blockchain" },
   ]);
 
   const [selectedSports, setSelectedSports] = useState([]);
@@ -55,10 +54,10 @@ export default function MultiSelectFilter() {
   // render selected sports array
   const renderSelectedSports = () => {
     return (
-      <div style={{ display: "flex", flexDirection: "row", margin: "3px" }}>
+      <div style={{ display: "flex", flexDirection: "row", margin: "3px",justifyContent: "center",alignItems:"center" }}>
         {selectedSports.map((sport) => (
           <div
-            style={{ display: "flex", flexDirection: "row", margin: "3px" }}
+            style={{ display: "flex", flexDirection: "row", margin: "3px",justifyContent: "center",alignItems:"center" }}
             key={sport.id}
           >
             {sport.sports}
@@ -71,7 +70,7 @@ export default function MultiSelectFilter() {
   // render method
   return (
     <div>
-      <label>Select your favorite sports:</label>
+      <label>Select your Tech Stack:</label>
       {renderSportsDropdown()}
 
       {/* {selectedSports.length > 0 && (
