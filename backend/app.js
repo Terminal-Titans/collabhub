@@ -1,7 +1,6 @@
 // Importing required packages
 const express = require("express");
 const dotenv = require("dotenv");
-// const { mongoUrl } = require("./keys");
 const mongoose = require("mongoose");
 const cors = require("cors");
 

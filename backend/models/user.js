@@ -6,6 +6,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         // required: true
     },
+    about: {
+        type: String,
+    },
     college: {
         type: String,
         // required: true
@@ -44,10 +47,7 @@ const userSchema = new mongoose.Schema({
     },
     LeetCode: {
         type: String
-    },
-    posts:[{
-        type: ObjectId, ref: 'post'
-    }]
+    }
 })
 
 mongoose.model("USER", userSchema)

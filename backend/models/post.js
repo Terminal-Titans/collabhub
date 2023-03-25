@@ -35,39 +35,15 @@ const postSchema = new mongoose.Schema(
         },
       },
     ],
-    techStacks: [
-      {
-        name: {
-          type: String,
-          // required: true,
-        },
-      },
-    ],
-    // startDate: {
-    //   type: Date,
-    // },
-    // endDate: {
-    //   type: Date,
-    // },
+    techStacks: {type:String},
     startDate: {
       type: Date,
-      // get: function(date) {
-      //   return moment(date).format("YYYY-MM-DD");
-      // },
-      // set: function(dateString) {
-      //   return moment(dateString, "YYYY-MM-DD").toDate();
-      // },
+      
     },
     endDate: {
       type: Date,
-      // get: function(date) {
-      //   return moment(date).format("YYYY-MM-DD");
-      // },
-      // set: function(dateString) {
-      //   return moment(dateString, "YYYY-MM-DD").toDate();
-      // },
+     
     },
-
     collaborators: {
       type: Number,
       // required: true,
