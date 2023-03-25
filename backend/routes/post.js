@@ -65,6 +65,16 @@ router.get("/allposts", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+// Route to get a particular post from the database
+router.get("/allposts/:postId", (req, res) => {
+  const { postId } = req.params;
+  POST.findById(postId)
+    .populate("request", "_id name")
+    .populate("comments.postedBy", "_id name")
+    .then((post) => res.json(post))
+    .catch((err) => console.log(err));
+});
+
 // Route to get all posts created by a specific user
 router.get("/myposts", requireLogin, (req, res) => {
   const userId = req.user._id;
@@ -78,6 +88,15 @@ router.get("/myposts", requireLogin, (req, res) => {
         .then((posts) => res.json(posts))
         .catch((err) => console.log(err));
     })
+    .catch((err) => console.log(err));
+});
+
+router.get("/myposts/:postId", (req, res) => {
+  const { postId } = req.params;
+  POST.findById(postId)
+    .populate("request", "_id name")
+    .populate("comments.postedBy", "_id name")
+    .then((post) => res.json(post))
     .catch((err) => console.log(err));
 });
 
