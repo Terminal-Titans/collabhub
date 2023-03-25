@@ -1,65 +1,88 @@
-import * as React from 'react';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import ListItemText from '@mui/material/ListItemText';
-import Select from '@mui/material/Select';
-import Checkbox from '@mui/material/Checkbox';
+import React, { useState } from "react";
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
+export default function MultiSelectFilter() {
+  const [sportsData, setSportsData] = useState([
+    { id: "game1", sports: "Badminton" },
+    { id: "game2", sports: "Tennis" },
+    { id: "game3", sports: "Football" },
+    { id: "game4", sports: "Basketball" },
+    { id: "game5", sports: "Hockey" },
+  ]);
 
-const names = [
-  'WEB DEVELOPMENT',
-  'APP DEVELOPMENT',
-  'MACHINE LEARNING',
-  'BLOCKING DEVELOPMENT'
-];
+  const [selectedSports, setSelectedSports] = useState([]);
 
-export default function MultipleSelectCheckmarks() {
-  const [personName, setPersonName] = React.useState([]);
+  // add or remove selected sport from array based on checkbox state
+  const handleSportSelection = (sport) => {
+    let updatedSelectedSports = [...selectedSports];
+    const index = updatedSelectedSports.findIndex(
+      (selectedSport) => selectedSport.id === sport.id
+    );
 
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
+    if (index !== -1) {
+      updatedSelectedSports.splice(index, 1);
+    } else {
+      updatedSelectedSports.push(sport);
+    }
+
+    setSelectedSports(updatedSelectedSports);
+  };
+
+  // clear selected sports array
+  const handleClearSelection = () => {
+    setSelectedSports([]);
+  };
+
+  // render sports dropdown with checkboxes
+  const renderSportsDropdown = () => {
+    return (
+      <div style={{display:"flex",flexDirection:"row"}}>
+        {sportsData.map((sport) => (
+          <label key={sport.id}>
+            <input
+              type="checkbox"
+              checked={selectedSports.some(
+                (selectedSport) => selectedSport.id === sport.id
+              )}
+              onChange={() => handleSportSelection(sport)}
+            />
+            {sport.sports}
+          </label>
+        ))}
+      </div>
     );
   };
 
+  // render selected sports array
+  const renderSelectedSports = () => {
+    return (
+      <div style={{ display: "flex", flexDirection: "row", margin: "3px" }}>
+        {selectedSports.map((sport) => (
+          <div
+            style={{ display: "flex", flexDirection: "row", margin: "3px" }}
+            key={sport.id}
+          >
+            {sport.sports}
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  // render method
   return (
     <div>
-      <FormControl className='formControl' sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
-        <Select
-          labelId="demo-multiple-checkbox-label"
-          id="demo-multiple-checkbox"
-          multiple
-          value={personName}
-          onChange={handleChange}
-          input={<OutlinedInput label="Tag" />}
-          renderValue={(selected) => selected.join(', ')}
-          MenuProps={MenuProps}
-        >
-          {names.map((name) => (
-            <MenuItem key={name} value={name}>
-              <Checkbox checked={personName.indexOf(name) > -1} />
-              <ListItemText primary={name} />
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <label>Select your favorite sports:</label>
+      {renderSportsDropdown()}
+
+      {/* {selectedSports.length > 0 && (
+        <div>
+          <h2>Selected sports:</h2>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            {renderSelectedSports()}
+          </div>
+          <button onClick={handleClearSelection}>Clear selection</button>
+        </div>
+      )} */}
     </div>
   );
 }
