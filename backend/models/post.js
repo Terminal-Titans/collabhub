@@ -16,7 +16,6 @@ const postSchema = new mongoose.Schema(
       type: String,
       // required: true
     },
-    likes: [{ type: ObjectId, ref: "USER" }],
     comments: [
       {
         comment: { type: String },
@@ -50,6 +49,14 @@ const postSchema = new mongoose.Schema(
       // required: true,
       default: 0,
     },
+    likes: [{
+      type: ObjectId,
+      ref: "USER"
+    }],
+    request: [{
+      type: ObjectId,
+      ref: "USER"
+    }]
   },
   { timestamps: true }
 );
