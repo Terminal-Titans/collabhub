@@ -36,7 +36,7 @@ export default function Navbar({ login }) {
             style={{ width: "135px",marginLeft: "20px" }}
             to="/followingpost"
           >
-            My Posts
+            My Activities
           </Link>
           <Link style={{ width: "135px",marginRight:"30px" }} to={""}>
             <button className="primaryBtn" onClick={() => setModalOpen(true)}>

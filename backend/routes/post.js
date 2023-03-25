@@ -141,28 +141,24 @@ router.put("/unlike", requireLogin, (req, res) => {
 // Route to add a comment to a post
 router.put("/comment", requireLogin, (req, res) => {
   const comment = {
-    text: req.body.text,
-    user: req.user._id,
-  };
-  POST.findByIdAndUpdate(
-    req.body.postId,
-    {
-      $push: { comments: comment },
-    },
-    {
-      new: true,
-    }
-  )
-    .populate("comments.postedBy", "_id name")
-    .populate("postedBy", "_id name Photo")
-    .exec((err, result) => {
-      if (err) {
-        return res.status(422).json({ error: err });
-      } else {
-        res.json(result);
-      }
-    });
-});
+      comment: req.body.text,
+      postedBy: req.user._id
+  }
+  POST.findByIdAndUpdate(req.body.postId, {
+      $push: { comments: comment }
+  }, {
+      new: true
+  })
+      .populate("comments.postedBy", "_id name")
+      .populate("postedBy", "_id name Photo")
+      .exec((err, result) => {
+          if (err) {
+              return res.status(422).json({ error: err })
+          } else {
+              res.json(result)
+          }
+      })
+})
 
 
 //adding reply to a comment
