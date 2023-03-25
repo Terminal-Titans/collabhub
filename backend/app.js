@@ -26,6 +26,11 @@ require("./models/post");
 // Parsing incoming JSON data
 app.use(express.json());
 
+//routes
+app.use(require("./routes/auth"));
+app.use(require("./routes/post"));
+app.use(require("./routes/user"));
+
 // Connecting to the MongoDB database
 mongoose.connect(mongoUrl);
 
