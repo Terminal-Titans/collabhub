@@ -109,6 +109,7 @@
 
 .container{
     display: flex;
+    align-items: center;
     width: 80%;
     background-color: white;
     position: absolute;
@@ -132,11 +133,11 @@
     width: 100%;
     height: inherit;
     display: flex;
-    flex-direction: column;
+    flex-direction: column !important;
 }
 
 .comment-section{
-    flex-grow: 4;
+    flex-grow: 4; 
     text-align: left;
     margin-left: 10px;
 }

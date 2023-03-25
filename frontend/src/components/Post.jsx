@@ -11,6 +11,7 @@ export default function Home() {
   const [comment, setComment] = useState("");
   const [show, setShow] = useState(false);
   const [item, setItem] = useState([]);
+  const [display, setDisplay] = useState([]);
 
   // Toast functions
   const notifyA = (msg) => toast.error(msg);
@@ -40,9 +41,15 @@ export default function Home() {
   const toggleComment = (posts) => {
     if (show) {
       setShow(false);
+      setDisplay([]);
+      console.log(display);
     } else {
       setShow(true);
       setItem(posts);
+      setDisplay([...display, posts]);
+      console.log("1");
+      console.log(display);
+      console.log("2");
     }
   };
 
@@ -236,7 +243,10 @@ export default function Home() {
 
                 {/* </div> */}
 
-                <div style={{height:"200px",overflow:"scroll"}} className="cattech">
+                <div
+                  style={{ height: "200px", overflow: "scroll" }}
+                  className="cattech"
+                >
                   <p style={{ fontWeight: "bold", cursor: "pointer" }}>
                     Description: {posts.body};
                   </p>
@@ -266,7 +276,14 @@ export default function Home() {
                   Post
                 </button> */}
               </div>
-              <div style={{display:"flex",flexDirection:"row",justifyContent:"space-evenly"}} className="dates">
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-evenly",
+                }}
+                className="dates"
+              >
                 <p style={{ fontWeight: "bold", cursor: "pointer" }}>
                   Start: {posts.startDate.slice(0, 10)}
                 </p>
@@ -301,64 +318,65 @@ export default function Home() {
               {/* <div className="postPic">
                 <img src={item.photo} alt="" />
               </div> */}
-              {data.map((posts) => {
+              {display.map((posts) => {
                 // console.log("jsdfjlfjlsjflfks")
                 console.log(posts.body);
                 return (
-                  <div className="add-comment">
-                    <p
-                      style={{
-                        fontWeight: "bold",
-                        color: "black",
-                        cursor: "pointer",
-                      }}
+                  <div style={{color:"black"}}>
+                    <div
+                      style={{ padding: "0px", margin: "0px" }}
+                      className="title"
                     >
-                      Categories: {posts.categories};
-                    </p>
-                    <p
+                      <h1 style={{ padding: "0px", margin: "0px" }}>
+                        {posts.title}
+                      </h1>
+                    </div>
+
+                    {/* add Comment */}
+                    <div className="add-comment">
+                      <div className="cattech">
+                        <p style={{ fontWeight: "bold", cursor: "pointer" }}>
+                          TechStack: {posts.techStacks};
+                        </p>
+                      </div>
+
+                      <div className="cattech">
+                        <p style={{ fontWeight: "bold", cursor: "pointer" }}>
+                          Collaborators: {posts.collaborators}
+                        </p>
+                      </div>
+                    </div>
+                    <div
                       style={{
-                        fontWeight: "bold",
-                        color: "black",
-                        cursor: "pointer",
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-evenly",
                       }}
+                      className="dates"
                     >
-                      techStacks: {posts.techStacks};
-                    </p>
-                    <p
-                      style={{
-                        fontWeight: "bold",
-                        color: "black",
-                        cursor: "pointer",
-                      }}
-                    >
-                      startDate: {posts.startDate};
-                    </p>
-                    <p
-                      style={{
-                        fontWeight: "bold",
-                        color: "black",
-                        cursor: "pointer",
-                      }}
-                    >
-                      endDate: {posts.endDate};
-                    </p>
-                    <p
-                      style={{
-                        fontWeight: "bold",
-                        color: "black",
-                        cursor: "pointer",
-                      }}
-                    >
-                      collaborators: {posts.contributors};
-                    </p>
-                    {/* <p
-                  style={{ fontWeight: "bold",color: "black", cursor: "pointer" }}
-                  onClick={() => {
-                    toggleComment(posts);
-                  }}
-                >
-                  Profile
-                </p> */}
+                      <p style={{ fontWeight: "bold", cursor: "pointer" }}>
+                        Start: {posts.startDate.slice(0, 10)}
+                      </p>
+                      <p style={{ fontWeight: "bold", cursor: "pointer" }}>
+                        End: {posts.endDate.slice(0, 10)}
+                      </p>
+                    </div>
+                    <div className="card-content">
+                      <p>{posts.likes.length} Likes</p>
+
+                      <button
+                        style={{
+                          fontWeight: "bold",
+                          marginleft: "10px",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          toggleComment(posts);
+                        }}
+                      >
+                        Request
+                      </button>
+                    </div>
                   </div>
                 );
               })}
@@ -378,14 +396,23 @@ export default function Home() {
                   <h5 style={{ color: "black" }}>{item.postedBy.name}</h5>
                 </div>
 
+                <div>
+
+                  <p style={{ color: "black" }}><h4>Description</h4> {item.body}</p>
+                </div>
+
                 {/* commentSection */}
                 <div
-                  className="comment-section"
+                  
                   style={{
                     color: "black",
                     borderBottom: "1px solid #00000029",
+                    marginLeft: "10px",
+                    maxHeight: "40px !important" 
                   }}
-                >
+                > <h4>Comments</h4>
+                  {item.comments[0]==null && <p>No Comments</p>}
+                  <div>
                   {item.comments.map((comment) => {
                     return (
                       <p className="comm">
@@ -403,14 +430,11 @@ export default function Home() {
                         </span>
                       </p>
                     );
-                  })}
+                  }
+                  )}</div>
                 </div>
 
                 {/* card content */}
-                <div className="card-content">
-                  <p style={{ color: "black" }}>{item.likes.length} Likes</p>
-                  <p style={{ color: "black" }}>{item.body}</p>
-                </div>
 
                 {/* add Comment */}
                 <div className="add-comment">

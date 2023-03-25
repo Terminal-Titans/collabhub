@@ -500,39 +500,7 @@ export default function Home() {
                   <p style={{ fontWeight: "bold", cursor: "pointer" }}>
                     TechStack: {posts.techStacks};
                   </p>
-                  {/* <p style={{ fontWeight: "bold", cursor: "pointer" }}>
-                    <select
-                      id="categories"
-                      // value={categories}
-                      // onChange={handleCategoryChange}
-                    >
-                      <option value="category1">Category 1</option>
-                      <option value="category2">Category 2</option>
-                      <option value="category3">Category 3</option>
-                    </select>
-                  </p> */}
-                  {/* <p
-                    style={{
-                      fontWeight: "bold",
-                      marginLeft: "2rem",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <select
-                    // id="techstacks"
-                    // value={techStacks}
-                    // onChange={() => handleTechStacksChange()}
-                    >
-                      <option value="category1">Techstack1</option>
-                      <option value="category2">Techstack2</option>
-                      <option value="category3">Techstack3</option>
-                    </select>
-                  </p> */}
                 </div>
-
-                {/* <div className="cattech"> */}
-
-                {/* </div> */}
 
                 <div style={{height:"200px",overflow:"scroll"}} className="cattech">
                   <p style={{ fontWeight: "bold", cursor: "pointer" }}>

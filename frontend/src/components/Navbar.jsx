@@ -38,7 +38,7 @@ export default function Navbar({ login }) {
           >
             My Posts
           </Link>
-          <Link style={{ width: "135px" }} to={""}>
+          <Link style={{ width: "135px",marginRight:"30px" }} to={""}>
             <button className="primaryBtn" onClick={() => setModalOpen(true)}>
               Log Out
             </button>
