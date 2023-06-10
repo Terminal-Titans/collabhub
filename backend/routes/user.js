@@ -7,21 +7,16 @@ const requireLogin = require("../middlewares/requireLogin");
 
 // to get user profile
 router.get("/user/:id", (req, res) => {
-    USER.findOne({ _id: req.params.id })
-        .select("-password")
-        .then(user => {
-            POST.find({ postedBy: req.params.id })
-                .populate("postedBy", "_id")
-                .exec((err, post) => {
-                    if (err) {
-                        return res.status(422).json({ error: err })
-                    }
-                    res.status(200).json({ user, post })
-                })
-        }).catch(err => {
-            return res.status(404).json({ error: "User not found" })
-        })
-})
+  USER.findById(req.params.id)
+    .select("-password") // Excludes password field from response
+    .populate("posts") // Populates the user's posts with their IDs and titles
+    .exec((err, user) => {
+      if (err || !user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      res.json({ user });
+    });
+});
 
 // to follow user
 router.put("/follow", requireLogin, (req, res) => {

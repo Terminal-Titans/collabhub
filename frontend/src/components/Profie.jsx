@@ -30,7 +30,7 @@ export default function Profie() {
 
   useEffect(() => {
     fetch(
-      `http://localhost:5000/user/${
+      `https://collabhub-backend.onrender.com/user/${
         JSON.parse(localStorage.getItem("user"))._id
       }`,
       {

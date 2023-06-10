@@ -60,7 +60,7 @@ const NewPost = () => {
     };
     console.log(newPost); // Do something with the new post data, e.g. send it to a server
 
-    fetch("http://localhost:5000/createPost", {
+    fetch("https://collabhub-backend.onrender.com/createPost", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
